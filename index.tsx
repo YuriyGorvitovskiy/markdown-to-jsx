@@ -1652,9 +1652,7 @@ export function compiler(
         }
       },
       react(node, output, state) {
-        const name = node.content as string;
-        console.log("Emoji Lookup: " + name + ", value: " + EMOJI_LOOKUP[name]);
-        return <span key={state.key}>{EMOJI_LOOKUP[name]}</span>
+        return <span key={state.key}>{EMOJI_LOOKUP[node.content as string]}</span>
       },
     } as MarkdownToJSX.Rule<ReturnType<MarkdownToJSX.NestedParser>>,
 
