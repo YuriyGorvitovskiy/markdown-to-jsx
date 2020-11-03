@@ -24,11 +24,7 @@
     "README.md"
   ],
   "source": "index.tsx",
-  "main": "dist/index.js",
-  "module": "dist/index.module.js",
-  "umd:main": "dist/index.umd.js",
-  "esmodule": "dist/index.modern.js",
-  "types": "dist/index.d.ts",
+  "main": "index.tsx",
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
