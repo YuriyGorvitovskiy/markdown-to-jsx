@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "incremental": true,
     "jsx": "react",
@@ -9,5 +10,8 @@
     "outDir": "./dist",
     "target": "ES2018"
   },
-  "files": ["index.tsx"]
+  "files": [
+    "index.tsx",
+    "emoji.json"
+  ]
 }

@@ -2768,7 +2768,9 @@ describe('line breaks', () => {
           Overlook Hotel
         </a>
         <br>
-        :star:
+        <span>
+          ⭐
+        </span>
         <br>
         Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s.
       </p>
