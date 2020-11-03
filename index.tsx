@@ -1283,7 +1283,7 @@ export function compiler(
         return {
           content: [
             {
-              content: capture[2] || capture[1],
+              content: capture[3] || capture[1],
               type: 'text',
             },
           ],
