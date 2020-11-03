@@ -2191,7 +2191,7 @@ $25
     render(
       compiler(
         [
-          '<DatePicker ',
+          '<DatePicker',
           '    biasTowardDateTime="2017-12-05T07:39:36.091Z"',
           '    timezone="UTC+5"',
           '/>',
@@ -2218,7 +2218,7 @@ $25
     render(
       compiler(
         [
-          '<DatePicker ',
+          '<DatePicker',
           '    startTime={1514579720511}',
           '    endTime={"1514579720512"}',
           '/>',
@@ -2259,7 +2259,7 @@ $25
     render(
       compiler(
         [
-          '<InterpolationTest ',
+          '<InterpolationTest',
           '    component={<Inner children="bah" />}',
           '    component2={<Inner>blah</Inner>}',
           '    component3={<Inner disabled />}',
@@ -2751,7 +2751,15 @@ describe('line breaks', () => {
 
     expect(lineBreak).not.toBe(null)
   })
+  it('should be added for space \n space sequences', () => {
+    render(compiler(['hello', 'there'].join(' \n ')))
+
+    const lineBreak = root.querySelector('br')
+
+    expect(lineBreak).not.toBe(null)
+  })
 })
+
 
 describe('fenced code blocks', () => {
   it('should be handled', () => {
