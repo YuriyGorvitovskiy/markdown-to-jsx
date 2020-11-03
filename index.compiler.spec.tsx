@@ -2751,12 +2751,28 @@ describe('line breaks', () => {
 
     expect(lineBreak).not.toBe(null)
   })
-  it('should be added for space \n space sequences', () => {
+  it('should be added for space \\n space sequences', () => {
     render(compiler(['hello', 'there'].join(' \n ')))
 
     const lineBreak = root.querySelector('br')
 
     expect(lineBreak).not.toBe(null)
+  })
+
+  it('should be added for space \\n space sequences', () => {
+    render(compiler("<https://example.com|Overlook Hotel> \n :star: \n Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s."))
+
+    expect(root.innerHTML).toMatchInlineSnapshot(`
+      <p>
+        <a href="https://example.com">
+          Overlook Hotel
+        </a>
+        <br>
+        :star:
+        <br>
+        Doors had too many axe holes, guest in room 237 was far too rowdy, whole place felt stuck in the 1920s.
+      </p>
+      `)
   })
 })
 
@@ -3271,3 +3287,4 @@ it('handles a holistic example', () => {
 
   expect(root.innerHTML).toMatchSnapshot()
 })
+

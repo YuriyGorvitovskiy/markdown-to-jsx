@@ -246,7 +246,7 @@ const AUTOLINK_MAILTO_CHECK_R = /mailto:/i
 const BLOCK_END_R = /\n{2,}$/
 const BLOCKQUOTE_R = /^( *>[^\n]+(\n[^\n]+)*\n*)+\n{2,}/
 const BLOCKQUOTE_TRIM_LEFT_MULTILINE_R = /^ *> ?/gm
-const BREAK_LINE_R = /^( {2,}\n)|( \n )/
+const BREAK_LINE_R = /^( {2,}\n| \n )/
 const BREAK_THEMATIC_R = /^(?:( *[-*_]) *){3,}(?:\n *)+\n/
 const CODE_BLOCK_FENCED_R = /^\s*(`{3,}|~{3,}) *(\S+)? *\n([\s\S]+?)\s*\1 *(?:\n *)+\n?/
 const CODE_BLOCK_R = /^(?: {4}[^\n]+\n*)+(?:\n *)+\n?/
@@ -321,7 +321,7 @@ const TEXT_EMPHASIZED_R = /^([*_])((?:\[.*?\][([].*?[)\]]|<.*?>(?:.*?<.*?>)?|`.*
 const TEXT_STRIKETHROUGHED_R = /^~~((?:\[.*?\]|<.*?>(?:.*?<.*?>)?|`.*?`|.)*?)~~/
 
 const TEXT_ESCAPED_R = /^\\([^0-9A-Za-z\s])/
-const TEXT_PLAIN_R = /^[\s\S]+?(?=[^0-9A-Z\s\u00c0-\uffff&;.()'"]|\d+\.|\n\n| {2,}\n|\w+:\S|$)/i
+const TEXT_PLAIN_R = /^[\s\S]+?(?=[^0-9A-Z\s\u00c0-\uffff&;.()'"]|\d+\.|\n\n| {2,}\n| \n |\w+:\S|$)/i
 const TRIM_NEWLINES_AND_TRAILING_WHITESPACE_R = /(^\n+|\n+$|\s+$)/g
 
 const HTML_LEFT_TRIM_AMOUNT_R = /^([ \t]*)/
@@ -642,6 +642,7 @@ function parserFor(
         if (capture) {
           const currCaptureString = capture[0]
           source = source.substring(currCaptureString.length)
+
           const parsed = rule.parse(capture, nestedParse, state)
 
           // We also let rules override the default type of
