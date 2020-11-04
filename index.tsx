@@ -396,15 +396,7 @@ const BLOCK_SYNTAXES = [
   NP_TABLE_R,
   PARAGRAPH_R,
 ]
-/*
-type EmojiLookup = { [name: string]: string };
-const generateEmojiLookup = () => {
-  const lookup: EmojiLookup = {};
-  emoji.forEach(e => lookup[e.short_name] = e.unified.split("-").map(c => String.fromCharCode(parseInt(c, 16))).join());
-  return lookup;
-}
-const EMOJI_LOOKUP: EmojiLookup = emoji.mapgenerateEmojiLookup();
-*/
+
 function containsBlockSyntax(input: string) {
   return BLOCK_SYNTAXES.some(r => r.test(input))
 }
