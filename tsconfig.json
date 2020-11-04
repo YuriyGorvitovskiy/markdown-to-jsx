@@ -9,5 +9,7 @@
     "outDir": "./dist",
     "target": "ES2018"
   },
-  "files": ["index.tsx"]
+  "files": [
+    "index.tsx"
+  ]
 }
