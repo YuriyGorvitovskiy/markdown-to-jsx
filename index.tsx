@@ -7,7 +7,7 @@
 import React from 'react'
 /// <reference path="unquote.d.ts" />
 import unquote from 'unquote'
-import emoji from './emoji.json'; //Copied from https://unicodey.com/emoji-data/emoji.json
+import emoji from 'emoji-toolkit';
 
 export namespace MarkdownToJSX {
   /**
@@ -320,7 +320,7 @@ const TABLE_RIGHT_ALIGN = /^ *-+: *$/
 const TEXT_BOLD_R = /^([*_])\1((?:\[.*?\][([].*?[)\]]|<.*?>(?:.*?<.*?>)?|`.*?`|~+.*?~+|.)*?)\1\1(?!\1)/
 const TEXT_EMPHASIZED_R = /^([*_])((?:\[.*?\][([].*?[)\]]|<.*?>(?:.*?<.*?>)?|`.*?`|~+.*?~+|.)*?)\1(?!\1)/
 const TEXT_STRIKETHROUGHED_R = /^~~((?:\[.*?\]|<.*?>(?:.*?<.*?>)?|`.*?`|.)*?)~~/
-const TEXT_EMOJI_R = /^:([\-_0-9A-Za-z]+):/
+const TEXT_EMOJI_R = /^:[\-_0-9A-Za-z]+:/
 const TEXT_ESCAPED_R = /^\\([^0-9A-Za-z\s])/
 const TEXT_PLAIN_R = /^[\s\S]+?(?=[^0-9A-Z\s\u00c0-\uffff&;.()'"]|\d+\.|\n\n| {2,}\n| \n |\w+:\S|$)/i
 const TRIM_NEWLINES_AND_TRAILING_WHITESPACE_R = /(^\n+|\n+$|\s+$)/g
@@ -396,14 +396,15 @@ const BLOCK_SYNTAXES = [
   NP_TABLE_R,
   PARAGRAPH_R,
 ]
+/*
 type EmojiLookup = { [name: string]: string };
 const generateEmojiLookup = () => {
   const lookup: EmojiLookup = {};
   emoji.forEach(e => lookup[e.short_name] = e.unified.split("-").map(c => String.fromCharCode(parseInt(c, 16))).join());
   return lookup;
 }
-const EMOJI_LOOKUP: EmojiLookup = generateEmojiLookup();
-
+const EMOJI_LOOKUP: EmojiLookup = emoji.mapgenerateEmojiLookup();
+*/
 function containsBlockSyntax(input: string) {
   return BLOCK_SYNTAXES.some(r => r.test(input))
 }
@@ -1647,12 +1648,13 @@ export function compiler(
       order: Priority.MED,
       parse(capture, parse, state) {
         return {
-          // capture[1] -> emoji short_name
-          content: capture[1],
+          // capture[0] -> emoji short_name with colons on both sides
+          // that is what emoji-toolkit expected for short name
+          content: capture[0],
         }
       },
       react(node, output, state) {
-        return <span key={state.key}>{EMOJI_LOOKUP[node.content as string]}</span>
+        return <span key={state.key}>{emoji.shortnameToUnicode(node.content)}</span>
       },
     } as MarkdownToJSX.Rule<ReturnType<MarkdownToJSX.NestedParser>>,
 
